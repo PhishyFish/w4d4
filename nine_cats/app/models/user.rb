@@ -5,6 +5,10 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
 
+  has_many :cats,
+    foreign_key: :user_id,
+    class_name: :Cat
+
   attr_reader :password
 
   def password=(password)
