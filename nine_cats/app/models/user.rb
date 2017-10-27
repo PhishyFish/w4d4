@@ -9,6 +9,10 @@ class User < ApplicationRecord
     foreign_key: :user_id,
     class_name: :Cat
 
+  has_many :rental_requests,
+  foreign_key: :user_id,
+  class_name: :CatRentalRequest
+
   attr_reader :password
 
   def password=(password)

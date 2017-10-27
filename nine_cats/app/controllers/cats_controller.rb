@@ -40,11 +40,11 @@ class CatsController < ApplicationController
   end
 
   def update
-    @cat = current_user.cats.where('cats.id = ?', params[:id]).first
-    if @cat.update_attributes(cat_params)
+    @cat = Cat.find(params[:id])
+    if @cat.owner == current_user
+      @cat.update_attributes(cat_params)
       redirect_to cat_url(@cat)
     else
-      @cat = Cat.find(params[:id])
       flash.now[:errors] = @cat.errors.full_messages
       render :edit
     end
